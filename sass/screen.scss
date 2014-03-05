@@ -1,0 +1,85 @@
+/* Welcome to Compass.
+ * In this file you should write your main styles. (or centralize your imports)
+ * Import this file using the following HTML or equivalent:
+ * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+
+@import "compass/reset";
+@import "susy";
+
+@function pxtoem($px, $basepx) {
+    @return ($px/$basepx)+0em;
+}
+
+$fontsize: 14px;
+$lineheight: 16px;
+
+$defaultfont: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+
+$total-columns: 12; // 12 columns
+$column-width: 4em; // columns are 4em wide
+$gutter-width: 1em; // with 1em gutters
+$grid-padding: 1em; // and 1em padding on the grid container
+$container-style: magic; // fluid, magic, static
+
+$container-width: pxtoem(960px, $fontsize);
+
+$iphone-landscape: pxtoem(480px, $fontsize);
+$iphone-portrait: pxtoem(320px, $fontsize);
+$ipad-landscape: pxtoem(1024px, $fontsize);
+$ipad-portrait: pxtoem(768px, $fontsize);
+
+$mobile-portrait: pxtoem(600px, $fontsize);
+
+$gray: #333;
+
+body {
+    color: $gray;
+    font-family: $defaultfont;
+    font-size: $fontsize;
+    line-height: $lineheight;
+    background-color: white;
+
+    h1, h2, h3, h4, h5 { margin: 1em 0; }
+    h1 { font-size: 3em; line-height: 1em; }
+    h2 { font-size: 2.6em; line-height: 1em; }
+    h3 { font-size: 2em; line-height: 1em; }
+    h4 { font-size: 1.6em; line-height: 1em; }
+
+    .wrapper {
+        @include container;
+    }
+
+    header {
+        @include span-columns(5 omega, 12);
+        text-align: right;
+    }    
+    .main {
+        @include span-columns(9, 12);
+    }    
+    aside {
+        @include span-columns(3 omega, 12);
+
+        border-left: 1px dotted $gray;
+    }    
+    footer {
+        @include span-columns(12 omega, 12);
+    }
+}
+
+@include at-breakpoint(1px 12 $mobile-portrait) {
+    body {
+        font-size: $fontsize * 0.9;
+        line-height: $lineheight * 0.9;
+
+        header {
+            @include span-columns(12 omega, 12);
+            text-align: left;
+        }    
+        .main {
+            @include span-columns(12 omega, 12);
+        }    
+        aside {
+            @include span-columns(12 omega, 12);
+        }    
+    }
+}
